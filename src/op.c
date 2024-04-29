@@ -1,10 +1,9 @@
 /*
-** EPITECH PROJECT, 2023
+** EPITECH PROJECT, 2024
 ** op.c
 ** File description:
 ** Tom et Leo
 */
-
 #include "op.h"
 
 op_t op_tab[] = {

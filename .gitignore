@@ -1,0 +1,9 @@
+#*
+#*#
+*~
+a.out
+.vscode
+.DS_Store
+corewar.dSYM
+corewar
+libmy.a
