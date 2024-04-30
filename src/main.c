@@ -5,6 +5,7 @@
 ** main.c
 */
 #include "corewar.h"
+#include <stdint.h>
 #include "my.h"
 
 int read_h(int argc, char **argv)
