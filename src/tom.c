@@ -7,7 +7,7 @@
 #include "corewar.h"
 #include "my.h"
 
-void live(uint32_t player_number)
+void live(int player_number)
 {
     my_printf("Le joueur %u est vivant.\n", player_number);
 }
