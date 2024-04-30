@@ -6,6 +6,7 @@
 */
 #include "my.h"
 #include "op.h"
+#include <stdint.h>
 #ifndef COREWAR_H
     #define COREWAR_H
 
