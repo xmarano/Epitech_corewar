@@ -17,4 +17,6 @@ typedef struct pars {
     int test;
 } pars_t;
 
+void live(uint32_t player_number);
+
 #endif
