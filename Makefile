@@ -6,6 +6,7 @@
 ##
 
 SRCLIB	=	lib/my_atoi.c 		\
+			lib/my_is_num.c		\
 			lib/my_printf.c		\
 			lib/my_put_nbr_recursive.c	\
 			lib/my_put_nbr.c 	\

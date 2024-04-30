@@ -11,13 +11,16 @@
     #define COREWAR_H
 
 typedef struct S {
-    int test;
+    bool dump;
+    bool n;
+    bool a;
 } S_t;
 
 typedef struct pars {
     int test;
 } pars_t;
 
-void live(int player_number);
+int parsing_arguments(char **argv, S_t *s);
+void live(int player_number, char *player_name);
 
 #endif

@@ -5,7 +5,6 @@
 ** main.c
 */
 #include "corewar.h"
-#include <stdint.h>
 #include "my.h"
 
 int read_h(int argc, char **argv)
@@ -39,6 +38,9 @@ int main(int argc, char **argv)
 
     if (read_h(argc, argv) == 1)
         return 0;
-    my_printf("test\n");
+    if (parsing_arguments(argv, &s) == 84)
+        return 84;
+    my_printf("dump:%d|\nn:%d|\na:%d|\n", s.dump, s.n, s.a);
+    live(1, "toto");
     return 0;
 }
