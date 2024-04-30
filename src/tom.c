@@ -9,5 +9,5 @@
 
 void live(uint32_t player_number)
 {
-    printf("Le joueur %u est vivant.\n", player_number);
+    my_printf("Le joueur %u est vivant.\n", player_number);
 }

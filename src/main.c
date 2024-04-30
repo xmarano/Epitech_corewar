@@ -10,20 +10,25 @@
 
 int read_h(int argc, char **argv)
 {
-    char *buffer = NULL;
-    char ch;
-    long length = 0;
-    FILE *f = fopen("help.txt", "rb");
-    buffer = malloc(1);
+    FILE *file;
+    char *line = NULL;
+    size_t len = 0;
+    ssize_t read;
+    int verif = 0;
 
-    while ((ch = fgetc(f)) != EOF) {
-        buffer[length++] = ch;
-        buffer = realloc(buffer, length + 1);
+    if (argc == 2 && my_strcmp(argv[1], "-h") == 0)
+        verif = 1;
+    if (verif == 0)
+        return 0;
+    file = fopen("help.txt", "r");
+    read = getline(&line, &len, file);
+    while (read != -1) {
+        read = getline(&line, &len, file);
+        my_printf("%s", line);
     }
-    buffer[length] = '\0';
-    fclose(f);
-    my_printf("%s\n", buffer);
-    free(buffer);
+    my_printf("\n");
+    free(line);
+    fclose(file);
     return 1;
 }
 
@@ -32,9 +37,8 @@ int main(int argc, char **argv)
     S_t s = {0};
     pars_t pars = {0};
 
-    if (argc == 2 && my_strcmp(argv[1], "-h") == 0) {
-        if (read_h(argc, argv) == 1)
-            return 0;
-    }
+    if (read_h(argc, argv) == 1)
+        return 0;
+    my_printf("test\n");
     return 0;
 }
