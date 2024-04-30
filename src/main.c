@@ -13,7 +13,7 @@ int read_h(int argc, char **argv)
     long length = 0;
     FILE *f = fopen("help.txt", "rb");
 
-    if (argc == 2 && strcmp(argv[1], "-h") == 0)
+    if (argc == 2 && my_strcmp(argv[1], "-h") == 0)
         length = 1;
     if (length == 0)
         return 0;
@@ -24,7 +24,7 @@ int read_h(int argc, char **argv)
     fread(buffer, 1, length, f);
     buffer[length] = '\0';
     fclose(f);
-    printf("%s\n", buffer);
+    my_printf("%s\n", buffer);
     free(buffer);
     return 1;
 }

@@ -33,24 +33,24 @@
     #define CYCLE_DELTA 5
     #define NBR_LIVE 40
 
-    typedef char args_type_t;
+typedef char args_type_t;
 
-    typedef struct op_s {
-        char *mnemonique;
-        char nbr_args;
-        args_type_t type[MAX_ARGS_NUMBER];
-        char code;
-        int nbr_cycles;
-        char *comment;
-    } op_t;
+typedef struct op_s {
+    char *mnemonique;
+    char nbr_args;
+    args_type_t type[MAX_ARGS_NUMBER];
+    char code;
+    int nbr_cycles;
+    char *comment;
+} op_t;
 
-    extern op_t op_tab[];
+extern op_t op_tab[];
 
-    typedef struct header_s {
-        int magic;
-        char prog_name[PROG_NAME_LENGTH + 1];
-        int prog_size;
-        char comment[COMMENT_LENGTH + 1];
-    } header_t;
+typedef struct header_s {
+    int magic;
+    char prog_name[PROG_NAME_LENGTH + 1];
+    int prog_size;
+    char comment[COMMENT_LENGTH + 1];
+} header_t;
 
 #endif
