@@ -31,16 +31,21 @@ int read_h(int argc, char **argv)
     return 1;
 }
 
+void parsing_files(char **argv, Global_t *s)
+{
+    int place;
+}
+
 int main(int argc, char **argv)
 {
-    S_t s = {0};
-    pars_t pars = {0};
+    Global_t s = {0};
 
     if (read_h(argc, argv) == 1)
         return 0;
     if (parsing_arguments(argv, &s) == 84)
         return 84;
-    my_printf("dump:%d|\nn:%d|\na:%d|\n", s.dump, s.n, s.a);
-    live(1, "toto");
+    parsing_files(argv, &s);
+    //my_printf("dump:%d|\nn:%d|\na:%d|\n", s.dump, s.n, s.a);
+    //live(1, "toto");
     return 0;
 }
