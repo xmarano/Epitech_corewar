@@ -12,7 +12,7 @@ int dump_argument(char **argv, Global_t *s, int *i)
     if (my_strcmp("-dump", argv[(*i)]) == 0) {
         if (argv[(*i) + 1] != NULL && my_is_num(argv[(*i) + 1]) == 0) {
             s->pars.dump = true;
-            // ajouter argv[i] + 1 dans la struct
+            s->op.nbr_cycles = my_atoi(argv[(*i) + 1]);
             (*i) = (*i) + 2;
         } else
             return 84;
@@ -23,10 +23,9 @@ int dump_argument(char **argv, Global_t *s, int *i)
 int n_argument(char **argv, Global_t *s, int *i)
 {
     if (my_strcmp("-n", argv[(*i)]) == 0) {
-        if (argv[(*i) + 1] != NULL && my_is_num(argv[(*i) + 1]) == 0) {
-            s->pars.n = true;
+        if (argv[(*i) + 1] != NULL && my_is_num(argv[(*i) + 1]) == 0)
             (*i) = (*i) + 2;
-        } else
+        else
             return 84;
     }
     return 0;
@@ -35,10 +34,9 @@ int n_argument(char **argv, Global_t *s, int *i)
 int a_argument(char **argv, Global_t *s, int *i)
 {
     if (my_strcmp("-a", argv[(*i)]) == 0) {
-        if (argv[(*i) + 1] != NULL && (argv[(*i) + 1][0]) != '-') {
-            s->pars.a = true;
+        if (argv[(*i) + 1] != NULL && my_is_num(argv[(*i) + 1]) == 0)
             (*i) = (*i) + 2;
-        } else
+        else
             return 84;
     }
     return 0;
@@ -81,6 +79,7 @@ int cor_argument(char **argv, Global_t *s, int *i)
     if (is_cor_file(argv[(*i)]) == 0) {
         if (open_core_file(argv[(*i)]) == 84)
             return 84;
+        s->pars.nb_cor++;
     } else
         return 84;
     return 0;

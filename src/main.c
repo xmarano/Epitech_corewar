@@ -39,6 +39,7 @@ int main(int argc, char **argv)
         return 0;
     if (parsing_arguments(argv, &s) == 84)
         return 84;
-    my_printf("dump:%d|\nn:%d|\na:%d|\n", s.pars.dump, s.pars.n, s.pars.a);
+    arguments_to_linked_list(argv, &s);
+    my_printf("dump:\n|_%d\n|_%d\n", s.pars.dump, s.op.nbr_cycles);
     return 0;
 }
