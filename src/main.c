@@ -31,11 +31,6 @@ int read_h(int argc, char **argv)
     return 1;
 }
 
-void parsing_files(char **argv, Global_t *s)
-{
-    int place;
-}
-
 int main(int argc, char **argv)
 {
     Global_t s = {0};
@@ -44,8 +39,6 @@ int main(int argc, char **argv)
         return 0;
     if (parsing_arguments(argv, &s) == 84)
         return 84;
-    parsing_files(argv, &s);
-    //my_printf("dump:%d|\nn:%d|\na:%d|\n", s.dump, s.n, s.a);
-    //live(1, "toto");
+    my_printf("dump:%d|\nn:%d|\na:%d|\n", s.pars.dump, s.pars.n, s.pars.a);
     return 0;
 }
