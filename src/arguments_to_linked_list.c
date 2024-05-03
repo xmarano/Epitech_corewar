@@ -7,31 +7,26 @@
 #include "corewar.h"
 #include "my.h"
 
-//champion_t *add_champ(champion_t *champ, int numero, char *nom, char *fichier)
-//{
-//    Robot_t *nouveau_robot = malloc(sizeof(Robot_t));
-//    if (nouveau_robot == NULL) {
-//        // Gestion de l'erreur d'allocation de mémoire
-//        return champ;
-//    }
-//    nouveau_robot->numero = numero;
-//    nouveau_robot->nom = strdup(nom);
-//    nouveau_robot->fichier = strdup(fichier);
-//    nouveau_robot->suivant = NULL;
-//
-//    if (champ == NULL) {
-//        return nouveau_robot;
-//    }
-//    // Trouver le dernier robot dans la liste
-//    Robot_t *courant = champ;
-//    while (courant->suivant != NULL) {
-//        courant = courant->suivant;
-//    }
-//    // Ajouter le nouveau robot à la fin de la liste
-//    courant->suivant = nouveau_robot;
-//    return champ;
-//}
+champion_t *add_champion(champion_t *champ, int prog_number,
+    int load_address, char *file)
+{
+    champion_t *new = malloc(sizeof(champion_t));
+    champion_t *current;
 
+    if (new == NULL)
+        return champ;
+    new->prog_number = prog_number;
+    new->load_address = load_address;
+    new->prog_name = my_strdup(file);
+    new->next = NULL;
+    if (champ == NULL)
+        return new;
+    current = champ;
+    while (current->next != NULL)
+        current = current->next;
+    current->next = new;
+    return champ;
+}
 
 int init_prog_number(char **argv, Global_t *s, int *i)
 {
@@ -59,7 +54,7 @@ int init_load_address(char **argv, Global_t *s, int *i)
     return nb;
 }
 
-void arguments_to_linked_list(char **argv, Global_t *s)
+void arguments_to_linked_list(char **argv, Global_t *s, champion_t *champ)
 {
     int prog_number = 0;
     int load_address = 0;
@@ -72,8 +67,8 @@ void arguments_to_linked_list(char **argv, Global_t *s)
             i = i + 2;
         prog_number = init_prog_number(argv, s, &i);
         load_address = init_load_address(argv, s, &i);
-        prog_name = strdup(argv[i]);
-        my_printf("%d | %d | %s\n", prog_number, load_address, prog_name);
+        prog_name = my_strdup(argv[i]);
+        champ = add_champion(champ, prog_number, load_address, prog_name);
         free(prog_name);
     }
 }

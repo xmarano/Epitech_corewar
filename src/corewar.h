@@ -14,22 +14,21 @@ typedef struct pars {
     int nb_cor;
 } pars_t;
 
-typedef struct champion {
-    int prog_number;
-    char *load_address;
-    char *prog_name;
-    struct Champion *next;
-} champion_t;
-
 typedef struct Global {
     pars_t pars;
     op_t op;
-    champion_t champ;
     int prog_number;
 } Global_t;
 
+typedef struct champion {
+    int prog_number;
+    int load_address;
+    char *prog_name;
+    struct champion *next;
+} champion_t;
+
 int parsing_arguments(char **argv, Global_t *s);
-void arguments_to_linked_list(char **argv, Global_t *s);
+void arguments_to_linked_list(char **argv, Global_t *s, champion_t *champ);
 void live(int player_number, char *player_name);
 
 #endif

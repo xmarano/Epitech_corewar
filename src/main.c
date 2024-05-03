@@ -31,15 +31,42 @@ int read_h(int argc, char **argv)
     return 1;
 }
 
+void disp_list(champion_t *champ)
+{
+    champion_t *current = champ;
+
+    current = current->next;
+    while (current != NULL) {
+        printf("champ:\n|_Prog_number: %d\n|_Load_address: %d\n|_Name: %s\n", current->prog_number, current->load_address, current->prog_name);
+        current = current->next;
+    }
+}
+
+void free_linked_list(champion_t *champ)
+{
+    champion_t *current = champ;
+    champion_t *temp;
+
+    current = current->next;
+    while (current != NULL) {
+        temp = current;
+        current = current->next;
+        free(temp->prog_name);
+        free(temp);
+    }
+}
+
 int main(int argc, char **argv)
 {
     Global_t s = {0};
+    champion_t champ = {0};
 
     if (read_h(argc, argv) == 1)
         return 0;
     if (parsing_arguments(argv, &s) == 84)
         return 84;
-    arguments_to_linked_list(argv, &s);
-    my_printf("dump:\n|_%d\n|_%d\n", s.pars.dump, s.op.nbr_cycles);
+    arguments_to_linked_list(argv, &s, &champ);
+    disp_list(&champ);
+    free_linked_list(&champ);
     return 0;
 }
