@@ -98,6 +98,8 @@ int parsing_arguments(char **argv, Global_t *s)
             return 84;
         if (cor_argument(argv, s, &i) == 84)
             return 84;
+        if (s->pars.nb_cor > 4)
+            return 84;
     }
     return 0;
 }
