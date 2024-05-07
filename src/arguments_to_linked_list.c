@@ -70,6 +70,7 @@ char *init_prog_name(const char *filename)
             break;
         str[i] = byte;
     }
+    str[i] = '\0';
     fclose(file);
     return str;
 }
