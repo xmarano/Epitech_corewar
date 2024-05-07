@@ -8,7 +8,7 @@
 #include "my.h"
 
 champion_t *add_champion(champion_t *champ, int prog_number,
-    int load_address, char *file)
+    int load_address, char *prog_name)
 {
     champion_t *new = malloc(sizeof(champion_t));
     champion_t *current;
@@ -17,7 +17,7 @@ champion_t *add_champion(champion_t *champ, int prog_number,
         return champ;
     new->prog_number = prog_number;
     new->load_address = load_address;
-    new->prog_name = my_strdup(file);
+    new->prog_name = my_strdup(prog_name);
     new->next = NULL;
     if (champ == NULL)
         return new;
@@ -54,6 +54,26 @@ int init_load_address(char **argv, Global_t *s, int *i)
     return nb;
 }
 
+char *init_prog_name(const char *filename)
+{
+    FILE *file = fopen(filename, "rb");
+    uint8_t byte;
+    char *str = malloc(1000 * sizeof(char));
+    int white_space = 0;
+    int i = 0;
+
+    for (int a = 0; a < 4; a++)
+        fread(&byte, sizeof(uint8_t), 1, file);
+    for (; white_space == 0; i++) {
+        fread(&byte, sizeof(uint8_t), 1, file);
+        if (byte == 0)
+            break;
+        str[i] = byte;
+    }
+    fclose(file);
+    return str;
+}
+
 void arguments_to_linked_list(char **argv, Global_t *s, champion_t *champ)
 {
     int prog_number = 0;
@@ -67,7 +87,7 @@ void arguments_to_linked_list(char **argv, Global_t *s, champion_t *champ)
             i = i + 2;
         prog_number = init_prog_number(argv, s, &i);
         load_address = init_load_address(argv, s, &i);
-        prog_name = my_strdup(argv[i]);
+        prog_name = init_prog_name(argv[i]);
         champ = add_champion(champ, prog_number, load_address, prog_name);
         free(prog_name);
     }
