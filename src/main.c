@@ -37,7 +37,11 @@ void disp_list(champion_t *champ)
 
     current = current->next;
     while (current != NULL) {
-        printf("champ:\n|_Prog_number: %d\n|_Load_address: %d\n|_Name: %s\n", current->prog_number, current->load_address, current->prog_name);
+        my_printf("\x1b[38;5;21m" "champ:\n" "\x1b[0m");
+        my_printf("|_Prog_number: %d\n", current->prog_number);
+        my_printf("|_Load_address: %d\n", current->load_address);
+        my_printf("|_Prog_name: %s\n", current->prog_name);
+        my_printf("|_Prog_body: %s\n", current->prog_body);
         current = current->next;
     }
 }
@@ -52,6 +56,7 @@ void free_linked_list(champion_t *champ)
         temp = current;
         current = current->next;
         free(temp->prog_name);
+        free(temp->prog_body);
         free(temp);
     }
 }

@@ -24,6 +24,7 @@ typedef struct champion {
     int prog_number;
     int load_address;
     char *prog_name;
+    char *prog_body;
     struct champion *next;
 } champion_t;
 
