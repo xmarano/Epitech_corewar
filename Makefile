@@ -24,6 +24,7 @@ SRCLIB	=	lib/my_atoi.c 		\
 			lib/my_strchr.c		\
 
 SRCNAME	=	src/*.c				\
+			src/instructions/*.c \
 
 LIB 	=	libmy.a
 

@@ -30,6 +30,9 @@ typedef struct champion {
 
 int parsing_arguments(char **argv, Global_t *s);
 void arguments_to_linked_list(char **argv, Global_t *s, champion_t *champ);
-void live(int player_number, char *player_name);
-
+void add(champion_t *current);
+void ld(champion_t *current);
+void live(champion_t *current);
+void st(champion_t *current);
+void sub(champion_t *current);
 #endif

@@ -31,17 +31,32 @@ int read_h(int argc, char **argv)
     return 1;
 }
 
+void test_instructions(champion_t *current)
+{
+    my_printf("\x1b[38;5;208m" "  ├──add: " "\x1b[0m");
+    add(current);
+    my_printf("\x1b[38;5;208m" "  ├──ld: " "\x1b[0m");
+    ld(current);
+    my_printf("\x1b[38;5;208m" "  ├──live: " "\x1b[0m");
+    live(current);
+    my_printf("\x1b[38;5;208m" "  ├──st: " "\x1b[0m");
+    st(current);
+    my_printf("\x1b[38;5;208m" "  └──sub: " "\x1b[0m");
+    sub(current);
+}
+
 void disp_list(champion_t *champ)
 {
     champion_t *current = champ;
 
     current = current->next;
     while (current != NULL) {
-        my_printf("\x1b[38;5;21m" "champ:\n" "\x1b[0m");
-        my_printf("|_Prog_number: %d\n", current->prog_number);
-        my_printf("|_Load_address: %d\n", current->load_address);
-        my_printf("|_Prog_name: %s\n", current->prog_name);
-        my_printf("|_Prog_body: %s\n", current->prog_body);
+        my_printf("\x1b[38;5;21m" "champ %s:\n" "\x1b[0m", current->prog_name);
+        my_printf("├──Prog_number: %d\n", current->prog_number);
+        my_printf("├──Load_address: %d\n", current->load_address);
+        my_printf("├──Prog_name: %s\n", current->prog_name);
+        my_printf("└──Prog_body: %s\n", current->prog_body);
+        test_instructions(current);
         current = current->next;
     }
 }
