@@ -90,10 +90,11 @@ static void init_arena(Global_t *s)
 {
     int i = 0;
 
-    s->arena = malloc(MEM_SIZE + 1 * sizeof(char));
-    for (; i < MEM_SIZE; i++)
-        s->arena[i] = '0';
-    s->arena[i] = '\0';
+    s->arena = malloc(MEM_SIZE * sizeof(arena_t));
+    for (int i = 0; i < MEM_SIZE; i++) {
+        s->arena[i].val = '0';
+        s->arena[i].id = i;
+    }
 }
 
 int main(int argc, char **argv)

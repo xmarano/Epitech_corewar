@@ -33,13 +33,18 @@ typedef struct reg {
     int r16;
 } reg_t;
 
+typedef struct arena {
+    char val;
+    int id;
+} arena_t;
+
 typedef struct Global {
     pars_t pars;
     op_t op;
     reg_t reg;
     int pc;
     int prog_number;
-    char *arena;
+    arena_t *arena;
 } Global_t;
 
 typedef struct champion {
