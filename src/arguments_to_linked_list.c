@@ -16,11 +16,11 @@ static int prog_body2(uint8_t byte, char hex_chars[])
     return 0;
 }
 
-static char *prog_body(const char *filename)
+static char **prog_body(const char *filename)
 {
     FILE *file = fopen(filename, "rb");
     char hex_chars[] = "0123456789ABCDEF";
-    char *str = malloc(1000 * sizeof(char));
+    char **arr = malloc(1000 * sizeof(char *));
     uint8_t byte;
     int i = 0;
 
@@ -30,14 +30,15 @@ static char *prog_body(const char *filename)
         if (prog_body2(byte, hex_chars) == 1)
             break;
     for (int j = 1; j == 1; j = fread(&byte, sizeof(uint8_t), 1, file)) {
-        str[i] = hex_chars[(byte >> 4) & 0xF];
-        i++;
-        str[i] = hex_chars[byte & 0xF];
+        arr[i] = malloc(3 * sizeof(char));
+        arr[i][0] = hex_chars[(byte >> 4) & 0xF];
+        arr[i][1] = hex_chars[byte & 0xF];
+        arr[i][2] = '\0';
         i++;
     }
-    str[i] = '\0';
+    arr[i] = NULL;
     fclose(file);
-    return str;
+    return arr;
 }
 
 static char *prog_name(const char *filename)

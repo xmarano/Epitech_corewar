@@ -31,18 +31,20 @@ int read_h(int argc, char **argv)
     return 1;
 }
 
-void test_instructions(champion_t *current)
+void test_instructions(champion_t *current, int i)
 {
-    my_printf("\x1b[38;5;208m" "  ├──add: " "\x1b[0m");
-    add(current);
-    my_printf("\x1b[38;5;208m" "  ├──ld: " "\x1b[0m");
-    ld(current);
-    my_printf("\x1b[38;5;208m" "  ├──live: " "\x1b[0m");
-    live(current);
-    my_printf("\x1b[38;5;208m" "  ├──st: " "\x1b[0m");
-    st(current);
-    my_printf("\x1b[38;5;208m" "  └──sub: " "\x1b[0m");
-    sub(current);
+    if (my_strcmp(current->prog_body[i], "01") == 0)
+        inst_live(current);
+    if (my_strcmp(current->prog_body[i], "02") == 0)
+        inst_ld(current);
+    if (my_strcmp(current->prog_body[i], "03") == 0)
+        inst_st(current);
+    if (my_strcmp(current->prog_body[i], "04") == 0)
+        inst_add(current);
+    if (my_strcmp(current->prog_body[i], "05") == 0)
+        inst_sub(current);
+    if (my_strcmp(current->prog_body[i], "0B") == 0)
+        inst_sti(current);
 }
 
 void disp_list(champion_t *champ)
@@ -55,8 +57,12 @@ void disp_list(champion_t *champ)
         my_printf("├──Prog_number: %d\n", current->prog_number);
         my_printf("├──Load_address: %d\n", current->load_address);
         my_printf("├──Prog_name: %s\n", current->prog_name);
-        my_printf("└──Prog_body: %s\n", current->prog_body);
-        test_instructions(current);
+        my_printf("└──Prog_body:");
+        for (int i = 0; current->prog_body[i] != NULL; i++)
+            my_printf(" %s", current->prog_body[i]);
+        my_printf("\n");
+        for (int i = 0; current->prog_body[i] != NULL; i++)
+            test_instructions(current, i);
         current = current->next;
     }
 }
@@ -71,6 +77,8 @@ void free_linked_list(champion_t *champ)
         temp = current;
         current = current->next;
         free(temp->prog_name);
+        for (int i = 0; temp->prog_body[i] != NULL; i++)
+            free(temp->prog_body[i]);
         free(temp->prog_body);
         free(temp);
     }
@@ -86,7 +94,8 @@ int main(int argc, char **argv)
     if (parsing_arguments(argv, &s) == 84)
         return 84;
     arguments_to_linked_list(argv, &s, &champ);
-    disp_list(&champ);
+    for (int i = 0; i < s.op.nbr_cycles; i++)
+        disp_list(&champ);
     free_linked_list(&champ);
     return 0;
 }

@@ -24,15 +24,16 @@ typedef struct champion {
     int prog_number;
     int load_address;
     char *prog_name;
-    char *prog_body;
+    char **prog_body;
     struct champion *next;
 } champion_t;
 
 int parsing_arguments(char **argv, Global_t *s);
 void arguments_to_linked_list(char **argv, Global_t *s, champion_t *champ);
-void add(champion_t *current);
-void ld(champion_t *current);
-void live(champion_t *current);
-void st(champion_t *current);
-void sub(champion_t *current);
+void inst_add(champion_t *current);
+void inst_ld(champion_t *current);
+void inst_live(champion_t *current);
+void inst_st(champion_t *current);
+void inst_sti(champion_t *current);
+void inst_sub(champion_t *current);
 #endif
