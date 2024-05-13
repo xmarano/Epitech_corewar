@@ -9,7 +9,7 @@
     #define _OP_H_
 
     #define MEM_SIZE (6 * 1024)
-    #define IDX_MOD 512 //use
+    #define IDX_MOD 512
     #define MAX_ARGS_NUMBER 4
     #define COMMENT_CHAR '#'
     #define LABEL_CHAR ':'
@@ -18,7 +18,7 @@
     #define LABEL_CHARS "abcdefghijklmnopqrstuvwxyz_0123456789"
     #define NAME_CMD_STRING ".name"
     #define COMMENT_CMD_STRING ".comment"
-    #define REG_NUMBER 16 //use
+    #define REG_NUMBER 16
     #define T_REG 1
     #define T_DIR 2
     #define T_IND 4

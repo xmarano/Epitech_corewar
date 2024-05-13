@@ -7,9 +7,8 @@
 #include "../corewar.h"
 #include "../my.h"
 
-void inst_ld(champion_t *current)
+void inst_ld(Global_t *s)
 {
-    my_printf("\x1b[38;5;208m" "  ├──ld: " "\x1b[0m");
-    my_printf("Le joueur %d(%s) est vivant.\n",
-    current->prog_number, current->prog_name);
+    s->reg.r3 = s->pc + 34 % IDX_MOD;
+    my_printf("(%d)\n", s->reg.r3);
 }

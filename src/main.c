@@ -31,12 +31,12 @@ int read_h(int argc, char **argv)
     return 1;
 }
 
-void test_instructions(champion_t *current, int i)
+void test_instructions(champion_t *current, Global_t *s, int i)
 {
     if (my_strcmp(current->prog_body[i], "01") == 0)
         inst_live(current);
     if (my_strcmp(current->prog_body[i], "02") == 0)
-        inst_ld(current);
+        inst_ld(s);
     if (my_strcmp(current->prog_body[i], "03") == 0)
         inst_st(current);
     if (my_strcmp(current->prog_body[i], "04") == 0)
@@ -45,9 +45,10 @@ void test_instructions(champion_t *current, int i)
         inst_sub(current);
     if (my_strcmp(current->prog_body[i], "0B") == 0)
         inst_sti(current);
+    s->pc++;
 }
 
-void disp_list(champion_t *champ)
+void disp_list(champion_t *champ, Global_t *s)
 {
     champion_t *current = champ;
 
@@ -61,6 +62,8 @@ void disp_list(champion_t *champ)
         for (int i = 0; current->prog_body[i] != NULL; i++)
             my_printf(" %s", current->prog_body[i]);
         my_printf("\n");
+        for (int i = 0; current->prog_body[i] != NULL; i++)
+            test_instructions(current, s, i);
         current = current->next;
     }
 }
@@ -105,7 +108,7 @@ int main(int argc, char **argv)
     init_arena(&s);
     arguments_to_linked_list(argv, &s, &champ);
     for (int i = 0; i < s.op.nbr_cycles; i++)
-        disp_list(&champ);
+        disp_list(&champ, &s);
     free_linked_list(&champ, &s);
     return 0;
 }
