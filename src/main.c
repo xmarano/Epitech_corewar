@@ -106,6 +106,7 @@ int main(int argc, char **argv)
     if (parsing_arguments(argv, &s) == 84)
         return 84;
     init_arena(&s);
+    arene_ncurse(&s);
     arguments_to_linked_list(argv, &s, &champ);
     for (int i = 0; i < s.op.nbr_cycles; i++)
         disp_list(&champ, &s);

@@ -33,7 +33,7 @@ OBJLIB	=	$(SRCLIB:.c=.o)
 NAME	=	corewar
 
 $(NAME) : 	$(LIB) $(OBJNAME)
-			gcc -o $(NAME) $(SRCNAME) -lmy -L./ -g3
+			gcc -o $(NAME) $(SRCNAME) -lmy -L./ -lncurses -g3
 
 $(LIB) 	: 	$(OBJLIB)
 			ar rc libmy.a lib/*.o

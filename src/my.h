@@ -17,6 +17,7 @@
     #include <stdbool.h>
     #include <errno.h>
     #include <stdint.h>
+    #include <ncurses.h>
 char *my_strchr(const char *s, int c);
 char *my_strstr(char *source, char *search);
 char *my_strrchr(const char *s, int c);
