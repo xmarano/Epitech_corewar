@@ -61,13 +61,11 @@ void disp_list(champion_t *champ)
         for (int i = 0; current->prog_body[i] != NULL; i++)
             my_printf(" %s", current->prog_body[i]);
         my_printf("\n");
-        for (int i = 0; current->prog_body[i] != NULL; i++)
-            test_instructions(current, i);
         current = current->next;
     }
 }
 
-void free_linked_list(champion_t *champ)
+void free_linked_list(champion_t *champ, Global_t *s)
 {
     champion_t *current = champ;
     champion_t *temp;
@@ -82,6 +80,17 @@ void free_linked_list(champion_t *champ)
         free(temp->prog_body);
         free(temp);
     }
+    free(s->arena);
+}
+
+static void init_arena(Global_t *s)
+{
+    int i = 0;
+
+    s->arena = malloc(MEM_SIZE + 1 * sizeof(char));
+    for (; i < MEM_SIZE; i++)
+        s->arena[i] = '0';
+    s->arena[i] = '\0';
 }
 
 int main(int argc, char **argv)
@@ -93,9 +102,10 @@ int main(int argc, char **argv)
         return 0;
     if (parsing_arguments(argv, &s) == 84)
         return 84;
+    init_arena(&s);
     arguments_to_linked_list(argv, &s, &champ);
     for (int i = 0; i < s.op.nbr_cycles; i++)
         disp_list(&champ);
-    free_linked_list(&champ);
+    free_linked_list(&champ, &s);
     return 0;
 }

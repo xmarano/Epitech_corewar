@@ -18,6 +18,7 @@ typedef struct Global {
     pars_t pars;
     op_t op;
     int prog_number;
+    char *arena;
 } Global_t;
 
 typedef struct champion {
