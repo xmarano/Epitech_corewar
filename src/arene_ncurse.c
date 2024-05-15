@@ -55,7 +55,7 @@ void display_arena(Global_t *s)
     }
 }
 
-void arene_ncurse(Global_t *s)
+void arene_ncurse(Global_t *s, champion_t *champ)
 {
     int key;
 
@@ -67,6 +67,7 @@ void arene_ncurse(Global_t *s)
     while (1) {
         clear();
         display_arena(s);
+        display_infos(s, champ);
         refresh();
         key = getch();
         if (key == 'q')

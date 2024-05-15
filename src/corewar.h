@@ -15,22 +15,8 @@ typedef struct pars {
 } pars_t;
 
 typedef struct reg {
-    int r1;
-    int r2;
-    int r3;
-    int r4;
-    int r5;
-    int r6;
-    int r7;
-    int r8;
-    int r9;
-    int r10;
-    int r11;
-    int r12;
-    int r13;
-    int r14;
-    int r15;
-    int r16;
+    int pos;
+    int r[16];
 } reg_t;
 
 typedef struct arena {
@@ -63,5 +49,6 @@ void inst_live(champion_t *current);
 void inst_st(champion_t *current);
 void inst_sti(champion_t *current);
 void inst_sub(champion_t *current);
-void arene_ncurse(Global_t *s);
+void arene_ncurse(Global_t *s, champion_t *champ);
+void display_infos(Global_t *s, champion_t *champ);
 #endif

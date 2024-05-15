@@ -85,9 +85,12 @@ void fill_arena(Global_t *s, champion_t *champ)
 
     current = current->next;
     while (current != NULL) {
+        if (current->load_address == 6144)
+            a = (current->load_address / s->pars.nb_cor) * (champion - 1);
+        else
+            a = current->load_address;
         fill_arena2(s, current, &a, champion);
         champion++;
-        a = (MEM_SIZE / s->pars.nb_cor) * (champion - 1);
         current = current->next;
     }
 }
@@ -114,7 +117,7 @@ int main(int argc, char **argv)
     arguments_to_linked_list(argv, &s, &champ);
     init_arena(&s, &champ);
     if (s.pars.dump == true)
-        arene_ncurse(&s);
+        arene_ncurse(&s, &champ);
     free_linked_list(&champ, &s);
     return 0;
 }
