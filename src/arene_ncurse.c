@@ -19,7 +19,7 @@ void set_color(void)
     init_pair(8, COLOR_WHITE, COLOR_MAGENTA);
 }
 
-static void display_arena(Global_t *s, int temp, int i, char *str)
+static void display_arena_colors(Global_t *s, int temp, int i, char *str)
 {
     if (temp != s->arena[i].id && temp == 0)
         attron(COLOR_PAIR(s->arena[i].id + 4) | A_BOLD | A_BLINK);
@@ -32,7 +32,7 @@ static void display_arena(Global_t *s, int temp, int i, char *str)
         attroff(COLOR_PAIR(s->arena[i].id) | A_BOLD);
 }
 
-void display(Global_t *s)
+void display_arena(Global_t *s)
 {
     char str[4];
     int a = 0;
@@ -44,7 +44,7 @@ void display(Global_t *s)
         str[1] = s->arena[i].val;
         str[2] = ' ';
         str[3] = '\0';
-        display_arena(s, temp, i, str);
+        display_arena_colors(s, temp, i, str);
         if ((a + 1) % 64 == 0) {
             printw("\n");
             a = 0;
@@ -66,7 +66,7 @@ void arene_ncurse(Global_t *s)
     set_color();
     while (1) {
         clear();
-        display(s);
+        display_arena(s);
         refresh();
         key = getch();
         if (key == 'q')

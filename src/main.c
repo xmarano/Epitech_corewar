@@ -113,7 +113,8 @@ int main(int argc, char **argv)
         return 84;
     arguments_to_linked_list(argv, &s, &champ);
     init_arena(&s, &champ);
-    arene_ncurse(&s);
+    if (s.pars.dump == true)
+        arene_ncurse(&s);
     free_linked_list(&champ, &s);
     return 0;
 }
