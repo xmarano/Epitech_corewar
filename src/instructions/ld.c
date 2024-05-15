@@ -10,5 +10,6 @@
 void inst_ld(Global_t *s)
 {
     s->reg.r3 = s->pc + 34 % IDX_MOD;
-    my_printf("(%d)\n", s->reg.r3);
+    my_printf("\x1b[38;5;208m" "  ├──ld: " "\x1b[0m");
+    my_printf("Le registre 3 : (%d)\n", s->reg.r3);
 }
