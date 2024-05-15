@@ -48,26 +48,6 @@ void test_instructions(champion_t *current, Global_t *s, int i)
     s->pc++;
 }
 
-void disp_list(champion_t *champ, Global_t *s)
-{
-    champion_t *current = champ;
-
-    current = current->next;
-    while (current != NULL) {
-        my_printf("\x1b[38;5;21m" "champ %s:\n" "\x1b[0m", current->prog_name);
-        my_printf("├──Prog_number: %d\n", current->prog_number);
-        my_printf("├──Load_address: %d\n", current->load_address);
-        my_printf("├──Prog_name: %s\n", current->prog_name);
-        my_printf("└──Prog_body:");
-        for (int i = 0; current->prog_body[i] != NULL; i++)
-            my_printf(" %s", current->prog_body[i]);
-        my_printf("\n");
-        for (int i = 0; current->prog_body[i] != NULL; i++)
-            test_instructions(current, s, i);
-        current = current->next;
-    }
-}
-
 void free_linked_list(champion_t *champ, Global_t *s)
 {
     champion_t *current = champ;
@@ -86,14 +66,40 @@ void free_linked_list(champion_t *champ, Global_t *s)
     free(s->arena);
 }
 
-static void init_arena(Global_t *s)
+void static fill_arena2(Global_t *s, champion_t *current, int *a, int champion)
+{
+    for (int i = 0; current->prog_body[i] != NULL; i++) {
+        for (int j = 0; current->prog_body[i][j] != '\0'; j++) {
+            s->arena[(*a)].val = current->prog_body[i][j];
+            s->arena[(*a)].id = champion;
+            (*a)++;
+        }
+    }
+}
+
+void fill_arena(Global_t *s, champion_t *champ)
+{
+    champion_t *current = champ;
+    int a = 0;
+    int champion = 1;
+
+    current = current->next;
+    while (current != NULL) {
+        fill_arena2(s, current, &a, champion);
+        champion++;
+        a = (MEM_SIZE / s->pars.nb_cor) * (champion - 1);
+        current = current->next;
+    }
+}
+
+static void init_arena(Global_t *s, champion_t *champ)
 {
     int i = 0;
 
-    s->arena = malloc(MEM_SIZE + 1 * sizeof(char));
-    for (; i < MEM_SIZE; i++)
-        s->arena[i] = '0';
-    s->arena[i] = '\0';
+    s->arena = malloc(MEM_SIZE * sizeof(arena_t));
+    for (int i = 0; i < MEM_SIZE; i++)
+        s->arena[i].val = '0';
+    fill_arena(s, champ);
 }
 
 int main(int argc, char **argv)
@@ -105,11 +111,9 @@ int main(int argc, char **argv)
         return 0;
     if (parsing_arguments(argv, &s) == 84)
         return 84;
-    init_arena(&s);
-    arene_ncurse(&s);
     arguments_to_linked_list(argv, &s, &champ);
-    for (int i = 0; i < s.op.nbr_cycles; i++)
-        disp_list(&champ, &s);
+    init_arena(&s, &champ);
+    arene_ncurse(&s);
     free_linked_list(&champ, &s);
     return 0;
 }
