@@ -94,7 +94,7 @@ static void fill_arena(Global_t *s, champion_t *champ)
     }
 }
 
-static void init_arena(Global_t *s, champion_t *champ)
+void init_arena(Global_t *s, champion_t *champ)
 {
     int i = 0;
 
@@ -104,17 +104,35 @@ static void init_arena(Global_t *s, champion_t *champ)
     fill_arena(s, champ);
 }
 
+static void temp_disp_reg(reg_t *reg)
+{
+    reg_t *current = reg;
+    int champion = 1;
+
+    current = current->next;
+    while (current != NULL) {
+        my_printf("champion %d - pos : (%d)\n", champion, current->pos);
+        for (int i = 0; i != 16; i++)
+            my_printf("reg %d : (%d)\n", i, current->r[i]);
+        champion++;
+        my_printf("\n");
+        current = current->next;
+    }
+}
+
 int main(int argc, char **argv)
 {
     Global_t s = {0};
     champion_t champ = {0};
+    reg_t reg = {0};
 
     if (read_h(argc, argv) == 1)
         return 0;
     if (parsing_arguments(argv, &s) == 84)
         return 84;
-    arguments_to_linked_list(argv, &s, &champ);
+    arguments_to_linked_list(argv, &s, &champ, &reg);
     init_arena(&s, &champ);
+    temp_disp_reg(&reg);
     if (s.pars.dump == true)
         arene_ncurse(&s, &champ);
     free_linked_list(&champ, &s);

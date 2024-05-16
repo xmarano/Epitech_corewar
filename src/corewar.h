@@ -14,16 +14,6 @@ typedef struct pars {
     int nb_cor;
 } pars_t;
 
-typedef struct reg {
-    int pos;
-    int r[16];
-    //liste chainée nb .cor
-    //pos = pos actu
-    //r = tous 0
-    //r[0] = id champ;
-    struct reg *next;
-} reg_t;
-
 typedef struct arena {
     char val;
     int id;
@@ -32,7 +22,6 @@ typedef struct arena {
 typedef struct Global {
     pars_t pars;
     op_t op;
-    reg_t reg;
     int prog_number;
     arena_t *arena;
 } Global_t;
@@ -45,8 +34,15 @@ typedef struct champion {
     struct champion *next;
 } champion_t;
 
+typedef struct reg {
+    int pos;
+    int r[16];
+    struct reg *next;
+} reg_t;
+
 int parsing_arguments(char **argv, Global_t *s);
-void arguments_to_linked_list(char **argv, Global_t *s, champion_t *champ);
+void arguments_to_linked_list(char **argv, Global_t *s,
+    champion_t *champ, reg_t *reg);
 void inst_add(champion_t *current);
 void inst_ld(Global_t *s);
 void inst_live(champion_t *current);

@@ -110,7 +110,26 @@ int init_load_address(char **argv, Global_t *s, int *i)
     return nb;
 }
 
-void arguments_to_linked_list(char **argv, Global_t *s, champion_t *champ)
+reg_t *add_reg(reg_t *reg, int prog_number)
+{
+    reg_t *new = malloc(sizeof(reg_t));
+    reg_t *current;
+
+    if (new == NULL)
+        return reg;
+    new->r[0] = prog_number;
+    new->next = NULL;
+    if (reg == NULL)
+        return new;
+    current = reg;
+    while (current->next != NULL)
+        current = current->next;
+    current->next = new;
+    return reg;
+}
+
+void arguments_to_linked_list(char **argv, Global_t *s,
+    champion_t *champ, reg_t *reg)
 {
     int prog_number = 0;
     int load_address = 0;
@@ -123,5 +142,6 @@ void arguments_to_linked_list(char **argv, Global_t *s, champion_t *champ)
         prog_number = init_prog_number(argv, s, &i);
         load_address = init_load_address(argv, s, &i);
         champ = add_champion(champ, prog_number, load_address, argv[i]);
+        reg = add_reg(reg, prog_number);
     }
 }
