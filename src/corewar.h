@@ -33,7 +33,6 @@ typedef struct Global {
     pars_t pars;
     op_t op;
     reg_t reg;
-    int pc;
     int prog_number;
     arena_t *arena;
 } Global_t;
