@@ -17,6 +17,11 @@ typedef struct pars {
 typedef struct reg {
     int pos;
     int r[16];
+    //liste chainée nb .cor
+    //pos = pos actu
+    //r = tous 0
+    //r[0] = id champ;
+    struct reg *next;
 } reg_t;
 
 typedef struct arena {
