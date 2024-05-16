@@ -48,7 +48,7 @@ void inst_add(champion_t *current);
 void inst_ld(Global_t *s);
 void inst_live(champion_t *current);
 void inst_st(champion_t *current);
-void inst_sti(champion_t *current);
+void inst_sti(Global_t *s, int i);
 void inst_sub(champion_t *current);
 void arene_ncurse(Global_t *s, champion_t *champ, reg_t *reg);
 void display_infos(Global_t *s, champion_t *champ, reg_t *reg);

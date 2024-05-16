@@ -33,6 +33,21 @@ static void display_arena_colors(Global_t *s, int temp, int i, char *str)
     }
 }
 
+static void instruction(Global_t *s, char byte[3], int i)
+{
+    if (my_strcmp(byte, "0B") == 0)
+        inst_sti(s, i);
+}
+
+void check_instruction(Global_t *s, char *str, int i)
+{
+    char byte[3];
+
+    byte[0] = str[0];
+    byte[1] = str[1];
+    byte[2] = '\0';
+}
+
 void display_arena(Global_t *s)
 {
     char str[4];
@@ -45,6 +60,7 @@ void display_arena(Global_t *s)
         str[1] = s->arena[i].val;
         str[2] = ' ';
         str[3] = '\0';
+        check_instruction(s, str, i);
         display_arena_colors(s, temp, i, str);
         if ((a + 1) % 64 == 0) {
             printw("\n");

@@ -49,22 +49,6 @@ void free_linked_list(champion_t *champ, Global_t *s)
     free(s->arena);
 }
 
-void test_instructions(champion_t *current, Global_t *s, int i)
-{
-    if (my_strcmp(current->prog_body[i], "01") == 0)
-        inst_live(current);
-    if (my_strcmp(current->prog_body[i], "02") == 0)
-        inst_ld(s);
-    if (my_strcmp(current->prog_body[i], "03") == 0)
-        inst_st(current);
-    if (my_strcmp(current->prog_body[i], "04") == 0)
-        inst_add(current);
-    if (my_strcmp(current->prog_body[i], "05") == 0)
-        inst_sub(current);
-    if (my_strcmp(current->prog_body[i], "0B") == 0)
-        inst_sti(current);
-}
-
 static void fill_arena2(Global_t *s, champion_t *current, int *a, int champion)
 {
     for (int i = 0; current->prog_body[i] != NULL; i++) {
