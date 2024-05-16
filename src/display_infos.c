@@ -29,24 +29,23 @@ void display_infos_bottom(void)
     printw("|\n");
 }
 
-void display_infos(Global_t *s, champion_t *champ)
+void display_infos(Global_t *s, champion_t *champ, reg_t *reg)
 {
     champion_t *current = champ;
     int cham = 1;
 
     display_infos_top();
+    reg = reg->next;
     current = current->next;
     while (current != NULL) {
         printw("|\t\t");
         attron(COLOR_PAIR(cham) | A_BOLD);
         printw("Champion n°%d: ", current->prog_number);
         printw("%s\t\t\t", current->prog_name);
-        if (current->load_address == 6144)
-            printw("current: %d", ((MEM_SIZE / s->pars.nb_cor) * (cham - 1)));
-        else
-            printw("current: %d", current->load_address);
+        printw("current: %d", reg->pos);
         attroff(COLOR_PAIR(cham) | A_BOLD);
         printw("\t\t\t\t|\n");
+        reg = reg->next;
         current = current->next;
         cham++;
     }

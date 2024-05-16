@@ -9,8 +9,4 @@
 
 void inst_ld(Global_t *s)
 {
-    int r3;
-
-    //s->reg.r3 = s->pc + 34 % IDX_MOD;
-    //my_printf("(%d)\n", s->reg.r3);
 }

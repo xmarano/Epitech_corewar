@@ -76,32 +76,39 @@ static void fill_arena2(Global_t *s, champion_t *current, int *a, int champion)
     }
 }
 
-static void fill_arena(Global_t *s, champion_t *champ)
+static void fill_arena(Global_t *s, champion_t *champ, reg_t *reg)
 {
     champion_t *current = champ;
     int a = 0;
     int champion = 1;
 
     current = current->next;
+    reg = reg->next;
     while (current != NULL) {
-        if (current->load_address == 6144)
+        if (current->load_address == 6144) {
             a = (current->load_address / s->pars.nb_cor) * (champion - 1);
-        else
+            reg->pos = a;
+        } else {
             a = current->load_address;
+            reg->pos = a;
+        }
         fill_arena2(s, current, &a, champion);
         champion++;
         current = current->next;
+        reg = reg->next;
     }
 }
 
-void init_arena(Global_t *s, champion_t *champ)
+void init_arena(Global_t *s, champion_t *champ, reg_t *reg)
 {
     int i = 0;
 
     s->arena = malloc(MEM_SIZE * sizeof(arena_t));
-    for (int i = 0; i < MEM_SIZE; i++)
+    for (int i = 0; i < MEM_SIZE; i++) {
         s->arena[i].val = '0';
-    fill_arena(s, champ);
+        s->arena[i].pos = i;
+    }
+    fill_arena(s, champ, reg);
 }
 
 static void temp_disp_reg(reg_t *reg)
@@ -131,10 +138,10 @@ int main(int argc, char **argv)
     if (parsing_arguments(argv, &s) == 84)
         return 84;
     arguments_to_linked_list(argv, &s, &champ, &reg);
-    init_arena(&s, &champ);
+    init_arena(&s, &champ, &reg);
     temp_disp_reg(&reg);
     if (s.pars.dump == true)
-        arene_ncurse(&s, &champ);
+        arene_ncurse(&s, &champ, &reg);
     free_linked_list(&champ, &s);
     return 0;
 }

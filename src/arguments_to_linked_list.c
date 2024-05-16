@@ -16,9 +16,8 @@ static int prog_body2(uint8_t byte, char hex_chars[])
     return 0;
 }
 
-static char **prog_body(const char *filename)
+static char **prog_body(FILE *file)
 {
-    FILE *file = fopen(filename, "rb");
     char hex_chars[] = "0123456789ABCDEF";
     char **arr = malloc(1000 * sizeof(char *));
     uint8_t byte;
@@ -37,7 +36,6 @@ static char **prog_body(const char *filename)
         i++;
     }
     arr[i] = NULL;
-    fclose(file);
     return arr;
 }
 
@@ -67,13 +65,16 @@ champion_t *add_champion(champion_t *champ, int prog_number,
 {
     champion_t *new = malloc(sizeof(champion_t));
     champion_t *current;
+    FILE *file;
 
     if (new == NULL)
         return champ;
     new->prog_number = prog_number;
     new->load_address = load_address;
     new->prog_name = prog_name(filename);
-    new->prog_body = prog_body(filename);
+    file = fopen(filename, "rb");
+    new->prog_body = prog_body(file);
+    fclose(file);
     new->next = NULL;
     if (champ == NULL)
         return new;

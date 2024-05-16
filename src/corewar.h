@@ -17,6 +17,7 @@ typedef struct pars {
 typedef struct arena {
     char val;
     int id;
+    int pos;
 } arena_t;
 
 typedef struct Global {
@@ -49,6 +50,6 @@ void inst_live(champion_t *current);
 void inst_st(champion_t *current);
 void inst_sti(champion_t *current);
 void inst_sub(champion_t *current);
-void arene_ncurse(Global_t *s, champion_t *champ);
-void display_infos(Global_t *s, champion_t *champ);
+void arene_ncurse(Global_t *s, champion_t *champ, reg_t *reg);
+void display_infos(Global_t *s, champion_t *champ, reg_t *reg);
 #endif
