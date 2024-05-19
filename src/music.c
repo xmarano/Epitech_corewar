@@ -12,9 +12,7 @@ void init_music(Global_t *s)
     if (s->pars.dump == false)
         s->op.nbr_cycles = 1536;
     s->nbr_cycles_count = 1;
-    // Initialisation de SDL
-    SDL_Init(SDL_INIT_AUDIO);
-    // Initialisation de SDL_mixer
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+    SDL_Init(SDL_INIT_AUDIO); // Initialisation de SDL
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048); // Initialisation de SDL_mixer
     s->music = Mix_LoadMUS("src/instructions/Bizon.mp3");
 }
