@@ -25,6 +25,8 @@ typedef struct Global {
     op_t op;
     int prog_number;
     arena_t *arena;
+    Mix_Music *music;
+    int nbr_cycles_count;
 } Global_t;
 
 typedef struct champion {
@@ -46,10 +48,11 @@ void arguments_to_linked_list(char **argv, Global_t *s,
     champion_t *champ, reg_t *reg);
 void inst_add(champion_t *current);
 void inst_ld(Global_t *s);
-void inst_live(champion_t *current);
+void who_won(Global_t *s, char **argv);
 void inst_st(champion_t *current);
 void inst_sti(Global_t *s, int i);
 void inst_sub(champion_t *current);
 void arene_ncurse(Global_t *s, champion_t *champ, reg_t *reg);
 void display_infos(Global_t *s, champion_t *champ, reg_t *reg);
+void init_music(Global_t *s);
 #endif

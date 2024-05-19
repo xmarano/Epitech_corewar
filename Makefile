@@ -32,8 +32,11 @@ OBJLIB	=	$(SRCLIB:.c=.o)
 
 NAME	=	corewar
 
-$(NAME) : 	$(LIB) $(OBJNAME)
-			gcc -o $(NAME) $(SRCNAME) -lmy -L./ -lncurses -g3
+CFLAGS 	=	-I/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -I/opt/homebrew/Cellar/sdl2_mixer/2.8.0/include/SDL2
+LDFLAGS	=	-L/opt/homebrew/Cellar/sdl2/2.30.3/lib -L/opt/homebrew/Cellar/sdl2_mixer/2.8.0/lib -lSDL2 -lSDL2_mixer -lncurses -g3
+
+$(NAME) :   $(LIB) $(OBJNAME)
+			gcc -o $(NAME) $(SRCNAME) -lmy -L./ -D_REENTRANT $(CFLAGS) $(LDFLAGS)
 
 $(LIB) 	: 	$(OBJLIB)
 			ar rc libmy.a lib/*.o

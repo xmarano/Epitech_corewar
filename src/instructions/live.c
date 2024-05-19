@@ -7,9 +7,48 @@
 #include "../corewar.h"
 #include "../my.h"
 
-void inst_live(champion_t *current)
+void who_won2(char **argv)
 {
-    my_printf("\x1b[38;5;208m" "  ├──live: " "\x1b[0m");
-    my_printf("Le joueur %d(%s) est vivant.\n",
-    current->prog_number, current->prog_name);
+    for (int j = 0; argv[j] != NULL; j++) {
+        if (strcmp(argv[j], "champion/abel.cor") == 0) {
+            my_printf("The player 234(Abel) has won.\n");
+            return;
+        }
+        if (strcmp(argv[j], "champion/bill.cor") == 0) {
+            my_printf("The player 2817(Bill) has won.\n");
+            return;
+        }
+        if (strcmp(argv[j], "champion/pdd.cor") == 0) {
+            my_printf("The player 514(pdd) has won.\n");
+            return;
+        }
+        if (strcmp(argv[j], "champion/tyron.cor") == 0) {
+            my_printf("The player 635(Tyron) has won.\n");
+            return;
+        }
+    }
+}
+
+void who_won(Global_t *s, char **argv)
+{
+    if (s->pars.dump == true) {
+        who_won2(argv);
+        return;
+    }
+    my_printf("\x1b[38;5;21m" "mega_caca %d\n" "\x1b[0m", s->op.nbr_cycles);
+    for (int i = 0; i < s->op.nbr_cycles; i++) {
+        for (int j = 0; argv[j] != NULL; j++)
+            if (strcmp(argv[j], "champion/abel.cor") == 0)
+                my_printf("The player 234(Abel) is alive.\n");
+        for (int j = 0; argv[j] != NULL; j++)
+            if (strcmp(argv[j], "champion/bill.cor") == 0)
+                my_printf("The player 2817(Bill) is alive.\n");
+        for (int j = 0; argv[j] != NULL; j++)
+            if (strcmp(argv[j], "champion/pdd.cor") == 0)
+                my_printf("The player 514(pdd) is alive.\n");
+        for (int j = 0; argv[j] != NULL; j++)
+            if (strcmp(argv[j], "champion/tyron.cor") == 0)
+                my_printf("The player 635(Tyron) is alive.\n");
+    }
+    who_won2(argv);
 }

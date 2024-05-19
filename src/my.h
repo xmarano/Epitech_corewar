@@ -18,6 +18,9 @@
     #include <errno.h>
     #include <stdint.h>
     #include <ncurses.h>
+    #include "/opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2/SDL.h"
+    #include "/opt/homebrew/Cellar/sdl2_mixer/2.8.0/include/SDL2/SDL_mixer.h"
+    #include <time.h>
 char *my_strchr(const char *s, int c);
 char *my_strstr(char *source, char *search);
 char *my_strrchr(const char *s, int c);

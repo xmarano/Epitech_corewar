@@ -87,8 +87,10 @@ void arene_ncurse(Global_t *s, champion_t *champ, reg_t *reg)
         display_infos(s, champ, reg);
         refresh();
         key = getch();
-        if (key == 'q')
+        if (key == 'q' || s->nbr_cycles_count == s->op.nbr_cycles)
             break;
+        if (key == ' ')
+            s->nbr_cycles_count++;
     }
     endwin();
 }

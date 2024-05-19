@@ -21,12 +21,15 @@ void display_infos_top(void)
     printw("|\n");
 }
 
-void display_infos_bottom(void)
+void display_infos_bottom(Global_t *s)
 {
     printw("|");
     for (int i = 0; i < 95; i++)
         printw("_");
-    printw("|\n");
+    printw("|");
+    attron(COLOR_PAIR(s->nbr_cycles_count % 10) | A_BOLD);
+    printw("\tCYCLE : %d/%d\n", s->nbr_cycles_count, s->op.nbr_cycles);
+    attroff(COLOR_PAIR(s->nbr_cycles_count % 10) | A_BOLD);
 }
 
 void display_infos(Global_t *s, champion_t *champ, reg_t *reg)
@@ -49,5 +52,5 @@ void display_infos(Global_t *s, champion_t *champ, reg_t *reg)
         current = current->next;
         cham++;
     }
-    display_infos_bottom();
+    display_infos_bottom(s);
 }

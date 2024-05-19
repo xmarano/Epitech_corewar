@@ -124,8 +124,13 @@ int main(int argc, char **argv)
     arguments_to_linked_list(argv, &s, &champ, &reg);
     init_arena(&s, &champ, &reg);
     temp_disp_reg(&reg);
+    init_music(&s);
+    Mix_PlayMusic(s.music, -1);
     if (s.pars.dump == true)
         arene_ncurse(&s, &champ, &reg);
+    who_won(&s, argv);
     free_linked_list(&champ, &s);
+    Mix_CloseAudio();
+    SDL_Quit();
     return 0;
 }
