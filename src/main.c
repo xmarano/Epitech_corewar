@@ -103,8 +103,7 @@ static void temp_disp_reg(reg_t *reg)
     current = current->next;
     while (current != NULL) {
         my_printf("champion %d - pos : (%d)\n", champion, current->pos);
-        for (int i = 0; i != 16; i++)
-            my_printf("reg %d : (%d)\n", i, current->r[i]);
+        my_printf("reg[0] = %d\n", current->r[0]);
         champion++;
         my_printf("\n");
         current = current->next;

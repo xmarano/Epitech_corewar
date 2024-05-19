@@ -28,7 +28,8 @@ void display_infos_bottom(Global_t *s)
         printw("_");
     printw("|");
     attron(COLOR_PAIR(s->nbr_cycles_count % 10) | A_BOLD);
-    printw("\tCYCLE : %d/%d\n", s->nbr_cycles_count, s->op.nbr_cycles);
+    printw("\tCYCLE : %d/%d\t(press [SPACE] for next cycle)\n",
+    s->nbr_cycles_count, s->op.nbr_cycles);
     attroff(COLOR_PAIR(s->nbr_cycles_count % 10) | A_BOLD);
 }
 

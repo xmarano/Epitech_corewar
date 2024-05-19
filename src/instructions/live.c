@@ -35,7 +35,6 @@ void who_won(Global_t *s, char **argv)
         who_won2(argv);
         return;
     }
-    my_printf("\x1b[38;5;21m" "mega_caca %d\n" "\x1b[0m", s->op.nbr_cycles);
     for (int i = 0; i < s->op.nbr_cycles; i++) {
         for (int j = 0; argv[j] != NULL; j++)
             if (strcmp(argv[j], "champion/abel.cor") == 0)

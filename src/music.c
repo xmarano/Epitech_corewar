@@ -9,6 +9,9 @@
 
 void init_music(Global_t *s)
 {
+    if (s->pars.dump == false)
+        s->op.nbr_cycles = 1536;
+    s->nbr_cycles_count = 1;
     // Initialisation de SDL
     SDL_Init(SDL_INIT_AUDIO);
     // Initialisation de SDL_mixer

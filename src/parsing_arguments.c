@@ -16,9 +16,7 @@ int dump_argument(char **argv, Global_t *s, int *i)
             (*i) = (*i) + 2;
         } else
             return 84;
-        return 0;
     }
-    s->op.nbr_cycles = 1536;
     return 0;
 }
 
